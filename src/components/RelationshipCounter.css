@@ -4,53 +4,72 @@
   height: 100vh;
   overflow: hidden;
   background-color: #050505;
-  color: #f5f5f5;
+}
+
+/* Video background */
+.counter-video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.counter-video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.counter-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 5, 5, 0.55);
+}
+
+/* Content over video */
+.counter-video-content {
+  position: relative;
+  z-index: 1;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
   text-align: center;
   padding: 2rem;
   box-sizing: border-box;
 }
 
-.counter-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem;
-  background: rgba(5, 5, 5, 0.4);
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
-}
-
-.section-title {
+.counter-title {
   font-family: 'Playfair Display', serif;
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   margin-bottom: 2rem;
-  text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
   letter-spacing: 1px;
   color: #d4af37;
 }
 
 .counter-display {
-  min-height: 150px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
 .counter-value {
   font-family: 'Playfair Display', serif;
-  font-size: 4rem;
+  font-size: 5rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-  letter-spacing: 2px;
+  text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
   display: flex;
   align-items: baseline;
-  gap: 0.2rem;
+  gap: 0.3rem;
 }
 
 .counter-value .number {
@@ -61,7 +80,7 @@
 }
 
 .counter-value .label {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: #f5f5f5;
   opacity: 0.8;
   font-family: 'Poppins', sans-serif;
@@ -71,76 +90,46 @@
   font-family: 'Poppins', sans-serif;
   font-size: 1.2rem;
   opacity: 0.9;
-  max-width: 500px;
-  line-height: 1.6;
+  margin-top: 0.5rem;
 }
 
-/* Add some subtle floating animation to the counter on load */
-.counter-display {
-  animation: floatUp 0.6s ease-out forwards;
-  animation-delay: 0.5s;
-  opacity: 0;
-}
-
-/* We'll animate the opacity in via framer-motion, so we keep the initial state hidden and let motion handle it */
-
-/* Next button */
-.counter-next-button {
-  position: absolute;
-  bottom: 5%;
-  left: 50%;
-  transform: translateX(-50%);
+.counter-cta-button {
+  margin-top: 3rem;
   background: linear-gradient(135deg, #d4af37, #8b5cf6);
   color: #050505;
   border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
   border-radius: 50px;
   transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
   font-family: 'Poppins', sans-serif;
   letter-spacing: 1px;
-  z-index: 10;
 }
 
-.counter-next-button:hover {
-  transform: translateX(-50%) translateY(-5px);
-  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+.counter-cta-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 768px) {
-  .counter-section {
-    padding: 1rem;
+  .counter-title {
+    font-size: 2rem;
   }
-  
-  .counter-container {
-    padding: 1.5rem;
-    margin: 0 1rem;
-  }
-  
-  .section-title {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-  }
-  
   .counter-value {
-    font-size: 3rem;
+    font-size: 3.5rem;
   }
-  
   .counter-value .label {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
-  
   .counter-description {
     font-size: 1rem;
   }
-  
-  .counter-next-button {
-    padding: 0.7rem 1.2rem;
-    font-size: 0.9rem;
-    bottom: 3%;
+  .counter-cta-button {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
   }
 }

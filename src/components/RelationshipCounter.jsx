@@ -14,13 +14,12 @@ const RelationshipCounter = ({ onNext }) => {
     setDaysTogether(days);
   }, []);
 
-  // Animated number counting effect
   const [animatedDays, setAnimatedDays] = useState(0);
 
   useEffect(() => {
     let animationFrame;
     const startTime = performance.now();
-    const duration = 2000; // 2 seconds for the counting animation
+    const duration = 2000;
 
     function updateCount(currentTime) {
       const elapsed = currentTime - startTime;
@@ -39,16 +38,24 @@ const RelationshipCounter = ({ onNext }) => {
 
   return (
     <section className="counter-section">
-      <div className="counter-container">
+      {/* Video background */}
+      <div className="counter-video-bg">
+        <video className="counter-video-player" autoPlay muted loop playsInline>
+          <source src="/assets/videos/video4.mp4" type="video/mp4" />
+        </video>
+        <div className="counter-video-overlay" />
+      </div>
+
+      <div className="counter-video-content">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, ease: 'easeOut' }}
-          className="section-title"
+          className="counter-title"
         >
           Notre Journee Ensemble
         </motion.h2>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,16 +67,16 @@ const RelationshipCounter = ({ onNext }) => {
             <span className="label">jours</span>
           </div>
           <p className="counter-description">
-            Depuis le jour où nos chemins se sont croisés
+            Depuis le 31 Janvier 2025
           </p>
         </motion.div>
-        
+
         <motion.button
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.5, ease: 'easeOut' }}
           onClick={onNext}
-          className="counter-next-button"
+          className="counter-cta-button"
         >
           Voir notre avenir
         </motion.button>
