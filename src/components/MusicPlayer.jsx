@@ -10,6 +10,8 @@ const MusicPlayer = () => {
   const audioRef = useRef(null);
   const switchTimerRef = useRef(null);
   const switchTimerActiveRef = useRef(false);
+  const isPlayingRef = useRef(false);
+  const volumeRef = useRef(0.5);
 
   const tracks = [
     { src: '/assets/music/background.mp3', duration: 60000, label: 'Musique 1' },
@@ -20,14 +22,14 @@ const MusicPlayer = () => {
 
   const switchToTrack = useCallback((trackIndex) => {
     if (!audioRef.current) return;
-    const wasPlaying = isPlaying;
+    const wasPlaying = isPlayingRef.current;
 
     audioRef.current.pause();
     audioRef.current.onended = null;
 
     const newAudio = new Audio(getTrackSrc(trackIndex));
     newAudio.loop = true;
-    newAudio.volume = volume;
+    newAudio.volume = volumeRef.current;
     newAudio.preload = 'auto';
     audioRef.current = newAudio;
     setCurrentTrack(trackIndex);
@@ -38,7 +40,7 @@ const MusicPlayer = () => {
         .then(() => setIsPlaying(true))
         .catch(() => {});
     }
-  }, [isPlaying, volume, tracks]);
+  }, []);
 
   const startSwitchTimer = useCallback(() => {
     if (switchTimerRef.current) clearTimeout(switchTimerRef.current);
@@ -57,7 +59,7 @@ const MusicPlayer = () => {
 
     const audio = new Audio(getTrackSrc(1));
     audio.loop = false;
-    audio.volume = volume;
+    audio.volume = volumeRef.current;
     audio.preload = 'auto';
     audioRef.current = audio;
 
@@ -78,6 +80,7 @@ const MusicPlayer = () => {
         audioRef.current.play()
           .then(() => {
             setIsPlaying(true);
+            isPlayingRef.current = true;
             setHasInteracted(true);
             startSwitchTimer();
           })
@@ -99,12 +102,14 @@ const MusicPlayer = () => {
       if (isPlaying) {
         audioRef.current.pause();
         setIsPlaying(false);
+        isPlayingRef.current = false;
         if (switchTimerRef.current) clearTimeout(switchTimerRef.current);
         switchTimerActiveRef.current = false;
       } else {
         audioRef.current.play()
           .then(() => {
             setIsPlaying(true);
+            isPlayingRef.current = true;
             setHasInteracted(true);
             if (currentTrack === 1 && !switchTimerActiveRef.current) {
               startSwitchTimer();
@@ -118,6 +123,7 @@ const MusicPlayer = () => {
   const handleVolumeChange = (e) => {
     const vol = parseFloat(e.target.value);
     setVolume(vol);
+    volumeRef.current = vol;
     if (audioRef.current) {
       audioRef.current.volume = vol;
     }
