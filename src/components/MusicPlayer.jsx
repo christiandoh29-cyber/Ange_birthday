@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './MusicPlayer.css';
 
 const MusicPlayer = () => {
@@ -7,41 +7,15 @@ const MusicPlayer = () => {
   const [hasInteracted, setHasInteracted] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(1);
   const audioRef = useRef(null);
+  const switchTimerRef = useRef(null);
+  const switchTimerActiveRef = useRef(false);
 
   const tracks = [
-    { src: '/assets/music/background.mp3', label: 'Musique 1' },
+    { src: '/assets/music/background.mp3', duration: 60000, label: 'Musique 1' },
     { src: '/assets/music/music2.mp3', label: 'Musique 2' },
   ];
 
-  // Create audio for first track
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current = null;
-    }
-
-    const audio = new Audio(tracks[0].src);
-    audio.loop = false;
-    audio.volume = volume;
-    audio.preload = 'auto';
-
-    // When first track ends naturally, switch to second
-    audio.onended = () => {
-      switchToTrack(2);
-    };
-
-    audioRef.current = audio;
-
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.onended = null;
-        audioRef.current = null;
-      }
-    };
-  }, []);
-
-  const switchToTrack = (trackIndex) => {
+  const switchToTrack = useCallback((trackIndex) => {
     if (!audioRef.current) return;
     const wasPlaying = isPlaying;
 
@@ -54,13 +28,45 @@ const MusicPlayer = () => {
     newAudio.preload = 'auto';
     audioRef.current = newAudio;
     setCurrentTrack(trackIndex);
+    switchTimerActiveRef.current = false;
 
     if (wasPlaying) {
       newAudio.play()
         .then(() => setIsPlaying(true))
         .catch(() => {});
     }
-  };
+  }, [isPlaying, volume, tracks]);
+
+  const startSwitchTimer = useCallback(() => {
+    if (switchTimerRef.current) clearTimeout(switchTimerRef.current);
+    switchTimerActiveRef.current = true;
+    switchTimerRef.current = setTimeout(() => {
+      switchToTrack(2);
+    }, tracks[0].duration);
+  }, [switchToTrack, tracks]);
+
+  // Create audio for first track
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+
+    const audio = new Audio(tracks[0].src);
+    audio.loop = false;
+    audio.volume = volume;
+    audio.preload = 'auto';
+    audioRef.current = audio;
+
+    return () => {
+      if (switchTimerRef.current) clearTimeout(switchTimerRef.current);
+      switchTimerActiveRef.current = false;
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
 
   // Listen for first user interaction to start audio
   useEffect(() => {
@@ -70,6 +76,7 @@ const MusicPlayer = () => {
           .then(() => {
             setIsPlaying(true);
             setHasInteracted(true);
+            startSwitchTimer();
           })
           .catch(() => {});
       }
@@ -82,18 +89,23 @@ const MusicPlayer = () => {
       document.removeEventListener('click', playOnInteraction);
       document.removeEventListener('touchstart', playOnInteraction);
     };
-  }, [hasInteracted]);
+  }, [hasInteracted, startSwitchTimer]);
 
   const togglePlay = () => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
         setIsPlaying(false);
+        if (switchTimerRef.current) clearTimeout(switchTimerRef.current);
+        switchTimerActiveRef.current = false;
       } else {
         audioRef.current.play()
           .then(() => {
             setIsPlaying(true);
             setHasInteracted(true);
+            if (currentTrack === 1 && !switchTimerActiveRef.current) {
+              startSwitchTimer();
+            }
           })
           .catch(() => {});
       }
