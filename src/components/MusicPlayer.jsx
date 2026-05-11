@@ -7,63 +7,47 @@ const MusicPlayer = () => {
   const [hasInteracted, setHasInteracted] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(1);
   const audioRef = useRef(null);
-  const switchTimerRef = useRef(null);
 
   const tracks = [
-    { src: '/assets/music/background.mp3', duration: 60000, label: 'Musique 1' },
+    { src: '/assets/music/background.mp3', label: 'Musique 1' },
     { src: '/assets/music/music2.mp3', label: 'Musique 2' },
   ];
 
+  // Create audio for first track
   useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+
     const audio = new Audio(tracks[0].src);
     audio.loop = false;
     audio.volume = volume;
     audio.preload = 'auto';
+
+    // When first track ends naturally, switch to second
+    audio.onended = () => {
+      switchToTrack(2);
+    };
+
     audioRef.current = audio;
 
     return () => {
-      if (switchTimerRef.current) clearTimeout(switchTimerRef.current);
       if (audioRef.current) {
         audioRef.current.pause();
+        audioRef.current.onended = null;
         audioRef.current = null;
       }
     };
   }, []);
-
-  // Listen for first interaction to start audio
-  useEffect(() => {
-    const playOnInteraction = () => {
-      if (audioRef.current && !hasInteracted) {
-        audioRef.current.play()
-          .then(() => {
-            setIsPlaying(true);
-            setHasInteracted(true);
-            startSwitchTimer();
-          })
-          .catch(() => {});
-      }
-    };
-
-    document.addEventListener('click', playOnInteraction, { once: true });
-    document.addEventListener('touchstart', playOnInteraction, { once: true });
-
-    return () => {
-      document.removeEventListener('click', playOnInteraction);
-      document.removeEventListener('touchstart', playOnInteraction);
-    };
-  }, [hasInteracted]);
-
-  const startSwitchTimer = () => {
-    switchTimerRef.current = setTimeout(() => {
-      switchToTrack(2);
-    }, tracks[0].duration);
-  };
 
   const switchToTrack = (trackIndex) => {
     if (!audioRef.current) return;
     const wasPlaying = isPlaying;
 
     audioRef.current.pause();
+    audioRef.current.onended = null;
+
     const newAudio = new Audio(tracks[trackIndex - 1].src);
     newAudio.loop = true;
     newAudio.volume = volume;
@@ -78,18 +62,38 @@ const MusicPlayer = () => {
     }
   };
 
+  // Listen for first user interaction to start audio
+  useEffect(() => {
+    const playOnInteraction = () => {
+      if (audioRef.current && !hasInteracted) {
+        audioRef.current.play()
+          .then(() => {
+            setIsPlaying(true);
+            setHasInteracted(true);
+          })
+          .catch(() => {});
+      }
+    };
+
+    document.addEventListener('click', playOnInteraction, { once: true });
+    document.addEventListener('touchstart', playOnInteraction, { once: true });
+
+    return () => {
+      document.removeEventListener('click', playOnInteraction);
+      document.removeEventListener('touchstart', playOnInteraction);
+    };
+  }, [hasInteracted]);
+
   const togglePlay = () => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
         setIsPlaying(false);
-        if (switchTimerRef.current) clearTimeout(switchTimerRef.current);
       } else {
         audioRef.current.play()
           .then(() => {
             setIsPlaying(true);
             setHasInteracted(true);
-            if (currentTrack === 1) startSwitchTimer();
           })
           .catch(() => {});
       }

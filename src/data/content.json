@@ -71,14 +71,18 @@
     "/assets/videos/video1.mp4",
     "/assets/videos/video2.mp4",
     "/assets/videos/video3.mp4",
-    "/assets/videos/video4.mp4"
+    "/assets/videos/video4.mp4",
+    "/assets/videos/video5.mp4",
+    "/assets/videos/video6.mp4"
 
   ],
   "galleryVideos": [
     "/assets/videos/video1.mp4",
     "/assets/videos/video2.mp4",
     "/assets/videos/video3.mp4",
-    "/assets/videos/video4.mp4"
+    "/assets/videos/video4.mp4",
+    "/assets/videos/video5.mp4",
+    "/assets/videos/video6.mp4"
   ],
   "heroBackground": {
     "type": "video",
@@ -95,7 +99,7 @@
     "Joyeux anniversaire"
   ],
   "specialMessage": [
-    "Je remercie le Seigneur pour tous ces bienfaits dans ta vie. 🙏",
+    "Jeremercie le Seigneur pour tous ces bienfaits dans ta vie. 🙏",
     "Ça a ete une grâce de te trouver, et c'est toujours une grâce de t'avoir dans ma vie.",
     "En ce jour spécial, je te souhaite un joyeux anniversaire à ma dulcinée, ma douceur, mon amour, celle qui m'a été révélée. ❤️",
     "Que le Seigneur t'accorde une santé de fer et de roche. 💪",
