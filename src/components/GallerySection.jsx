@@ -17,9 +17,11 @@ const GallerySection = ({ onNext }) => {
     })),
   ];
 
+  const videos = data.galleryVideos;
+  const images = data.slides;
+
   const openMedia = (index) => setSelectedIndex(index);
   const closeMedia = () => setSelectedIndex(null);
-
   const goNext = () => {
     if (selectedIndex < allMedia.length - 1) setSelectedIndex(selectedIndex + 1);
   };
@@ -29,7 +31,26 @@ const GallerySection = ({ onNext }) => {
 
   return (
     <section className="gallery-section">
-      <div className="gallery-header">
+      {/* Video background grid */}
+      <div className="video-background-grid">
+        {videos.map((video, i) => (
+          <div key={i} className="video-bg-cell">
+            <video
+              className="video-bg-player"
+              autoPlay
+              muted
+              loop
+              playsInline
+            >
+              <source src={video} type="video/mp4" />
+            </video>
+            <div className="video-bg-overlay" />
+          </div>
+        ))}
+      </div>
+
+      {/* Overlay content */}
+      <div className="gallery-overlay-content">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -44,36 +65,22 @@ const GallerySection = ({ onNext }) => {
           transition={{ duration: 1.5, delay: 0.3, ease: 'easeOut' }}
           className="gallery-subtitle"
         >
-          Chaque photo et video raconte notre histoire
+          Photos et videos de notre histoire
         </motion.p>
+
+        {/* Centered continue button */}
+        <motion.button
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.5, delay: 0.6, ease: 'easeOut' }}
+          onClick={onNext}
+          className="gallery-cta-button"
+        >
+          Continuer dans la galerie
+        </motion.button>
       </div>
 
-      <div className="gallery-grid">
-        {allMedia.map((item, index) => (
-          <motion.div
-            key={item.id}
-            layoutId={item.id}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: index * 0.04, ease: 'easeOut' }}
-            className="gallery-item"
-            onClick={() => openMedia(index)}
-          >
-            {item.type === 'video' ? (
-              <video className="gallery-img" muted loop playsInline>
-                <source src={item.image} type="video/mp4" />
-              </video>
-            ) : (
-              <img src={item.image} alt={item.title} className="gallery-img" />
-            )}
-            <div className="gallery-caption">
-              <span className="caption-type">{item.type === 'video' ? 'Video' : 'Photo'}</span>
-              <span className="caption-title">{item.title}</span>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
+      {/* Lightbox Modal */}
       <AnimatePresence>
         {selectedIndex !== null && (
           <motion.div
@@ -86,14 +93,10 @@ const GallerySection = ({ onNext }) => {
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
               <button className="modal-close" onClick={closeMedia}>X</button>
               {selectedIndex > 0 && (
-                <button className="modal-nav modal-prev" onClick={goPrev}>
-                  <span>◀</span>
-                </button>
+                <button className="modal-nav modal-prev" onClick={goPrev}><span>Prec</span></button>
               )}
               {selectedIndex < allMedia.length - 1 && (
-                <button className="modal-nav modal-next" onClick={goNext}>
-                  <span>▶</span>
-                </button>
+                <button className="modal-nav modal-next" onClick={goNext}><span>Suiv</span></button>
               )}
               <motion.div
                 key={selectedIndex}
@@ -121,15 +124,32 @@ const GallerySection = ({ onNext }) => {
         )}
       </AnimatePresence>
 
-      <motion.button
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5, delay: 0.5, ease: 'easeOut' }}
-        onClick={onNext}
-        className="gallery-next-button"
-      >
-        Decouvrir notre message
-      </motion.button>
+      {/* Grid of all media below */}
+      <div className="gallery-grid">
+        {allMedia.map((item, index) => (
+          <motion.div
+            key={item.id}
+            layoutId={item.id}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: index * 0.04, ease: 'easeOut' }}
+            className="gallery-item"
+            onClick={() => openMedia(index)}
+          >
+            {item.type === 'video' ? (
+              <video className="gallery-img" muted loop playsInline>
+                <source src={item.image} type="video/mp4" />
+              </video>
+            ) : (
+              <img src={item.image} alt={item.title} className="gallery-img" />
+            )}
+            <div className="gallery-caption">
+              <span className="caption-type">{item.type === 'video' ? 'Video' : 'Photo'}</span>
+              <span className="caption-title">{item.title}</span>
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </section>
   );
 };

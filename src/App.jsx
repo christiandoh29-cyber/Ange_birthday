@@ -7,30 +7,33 @@ import SpecialMessage from './components/SpecialMessage';
 import RelationshipCounter from './components/RelationshipCounter';
 import FinalSection from './components/FinalSection';
 import MusicPlayer from './components/MusicPlayer';
+import BackButton from './components/BackButton';
 import './App.css';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
-  const totalPages = 6; // Loading + 5 main sections
+  const totalPages = 6;
 
-  // Simulate loading time
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
-    
     return () => clearTimeout(timer);
   }, []);
 
-  // Handle page navigation
   const handleNextPage = () => {
     if (currentPage < totalPages - 1) {
       setCurrentPage(prev => prev + 1);
     }
   };
 
-  // Determine which page to show
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(prev => prev - 1);
+    }
+  };
+
   let content;
   if (isLoading) {
     content = <LoadingScreen onComplete={() => setIsLoading(false)} />;
@@ -52,16 +55,15 @@ function App() {
         content = <RelationshipCounter onNext={handleNextPage} />;
         break;
       case 5:
-        content = <FinalSection />;
+        content = <FinalSection onPrev={handlePrevPage} />;
         break;
-      default:
-        content = <HeroSection onNext={handleNextPage} />;
     }
   }
 
   return (
     <div className="App">
       <MusicPlayer />
+      {currentPage > 0 && !isLoading && <BackButton onClick={handlePrevPage} />}
       {content}
     </div>
   );
