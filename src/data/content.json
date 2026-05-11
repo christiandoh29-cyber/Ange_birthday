@@ -70,12 +70,15 @@
     "/assets/images/photo11.jpeg",
     "/assets/videos/video1.mp4",
     "/assets/videos/video2.mp4",
-    "/assets/videos/video3.mp4"
+    "/assets/videos/video3.mp4",
+    "/assets/videos/video4.mp4"
+
   ],
   "galleryVideos": [
     "/assets/videos/video1.mp4",
     "/assets/videos/video2.mp4",
-    "/assets/videos/video3.mp4"
+    "/assets/videos/video3.mp4",
+    "/assets/videos/video4.mp4"
   ],
   "heroBackground": {
     "type": "video",
@@ -87,21 +90,31 @@
   },
   "relationshipStartDate": "2025-01-31",
   "heroTexts": [
-    "Aujourd’hui est un jour spécial ✨",
-    "Une journée pour célébrer une femme incroyable",
-    "Joyeux anniversaire ❤️"
+    "Aujourd'hui est un jour special",
+    "Une journee pour celebrer une femme incroyable",
+    "Joyeux anniversaire"
   ],
   "specialMessage": [
-    "Co ntinue de briller comme tu sais si bien le faire.",
-    "Ne change jamais cette belle personne que tu es.",
-    "Que cette nouvelle année t’apporte encore plus de bonheur, de paix et de réussite.",
-    "Tu mérites tout ce qu’il y a de plus beau.",
-    "Profite pleinement de cette journée qui est la tienne ❤️"
+    "Je remercie le Seigneur pour tous ces bienfaits dans ta vie.",
+    "Ca ete une grace de te trouver et c'est toujours une grace de t'avoir dans ma vie.",
+    "En ce jour special, je te souhaite un joyeux anniversaire a ma dulcine, ma douceur, mon amour, celle qui m'a ete revelee.",
+    "Que le Seigneur t'accorde une sante de fer et de roche.",
+    "Je ne te le dis pas mais j'aime vraiment lorsque tu me fatigues avec tes chichis, tu deviens encore plus belle.",
+    "Ton intelligence me surprend toujours et je ne savais pas que tu avais un si grand coeur.",
+    "Tu es une femme avec un fort caractere, tu es une source de benediction pour moi.",
+    "Je declare que la joie divine soit ton partage ainsi qu'une longue vie ou nous allons voir nos enfants et petits-enfants ainsi qu'arriere petits-enfants.",
+    "Femme avec multi-casquette, vraiment c'est une benediction.",
+    "Baby my baby, je t'aime du plus profond de mon coeur.",
+    "J'ecris ce texte avec beaucoup d'emotion. Si je suis entrain de me battre c'est pour toi en premier.",
+    "Ma priere c'est de toujours t'aimer et t'aimer encore plus.",
+    "Souvent dans mes pensees je me perds a force de penser a toi. Tu hantes mes pensees cheri.",
+    "Tu es ma douceur, mon essentiel, ma cote.",
+    "Que DIEU te rende meilleure dans tes entreprises et dans tes etudes cheri."
   ],
   "endingTexts": [
     "Une femme magnifique.",
-    "Une âme précieuse.",
+    "Une ame precieuse.",
     "Une personne inoubliable.",
-    "Joyeux anniversaire ✨"
+    "Joyeux anniversaire <3"
   ]
 }

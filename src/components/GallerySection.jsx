@@ -57,7 +57,7 @@ const GallerySection = ({ onNext }) => {
           transition={{ duration: 1.5, ease: 'easeOut' }}
           className="gallery-title"
         >
-          Nos Moments Precieux
+          Tes Moments Precieux et de joie
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 30 }}
@@ -65,7 +65,7 @@ const GallerySection = ({ onNext }) => {
           transition={{ duration: 1.5, delay: 0.3, ease: 'easeOut' }}
           className="gallery-subtitle"
         >
-          Photos et videos de notre histoire
+          Photos et videos
         </motion.p>
 
         {/* Centered continue button */}
