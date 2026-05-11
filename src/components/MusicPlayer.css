@@ -15,6 +15,15 @@
   box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
 }
 
+.music-track-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.7rem;
+  color: #d4af37;
+  opacity: 0.8;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
 .music-button {
   background: none;
   border: none;

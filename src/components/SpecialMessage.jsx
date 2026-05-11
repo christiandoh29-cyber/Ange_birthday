@@ -12,26 +12,22 @@ const SpecialMessage = ({ onNext }) => {
     if (lineIndex < data.specialMessage.length) {
       const currentLine = data.specialMessage[lineIndex];
       if (charIndex < currentLine.length) {
-        // Type next character
         setTimeout(() => {
           setDisplayedText(prev => prev + currentLine.charAt(charIndex));
           setCharIndex(prev => prev + 1);
-        }, 100); // Typing speed
+        }, 100);
       } else {
-        // Line complete, wait a bit then move to next line
         setTimeout(() => {
           setLineIndex(prev => prev + 1);
           setCharIndex(0);
-          // Add a newline after each line except the last
           if (lineIndex < data.specialMessage.length - 1) {
             setDisplayedText(prev => prev + '\n');
           }
-        }, 1500); // Pause between lines
+        }, 1500);
       }
     }
   }, [lineIndex, charIndex]);
 
-  // Reset when component mounts or if we want to restart
   useEffect(() => {
     setDisplayedText('');
     setLineIndex(0);
@@ -40,7 +36,17 @@ const SpecialMessage = ({ onNext }) => {
 
   return (
     <section className="special-message-section">
-      <div className="message-container">
+      {/* Background video using the first gallery video */}
+      <div className="message-background">
+        {data.galleryVideos?.length > 0 && (
+          <video className="message-bg-video" autoPlay muted loop playsInline>
+            <source src={data.galleryVideos[0]} type="video/mp4" />
+          </video>
+        )}
+        <div className="message-bg-overlay" />
+      </div>
+
+      <div className="message-scroll-content">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -49,17 +55,16 @@ const SpecialMessage = ({ onNext }) => {
         >
           Un message pour toi
         </motion.h2>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.5, ease: 'easeOut' }}
-          className="message-box"
+          className="message-text"
         >
           <pre className="typing-text">{displayedText}</pre>
         </motion.div>
-        
-        {/* Show continue button only when message is fully displayed */}
+
         {lineIndex >= data.specialMessage.length && (
           <motion.button
             initial={{ opacity: 0, y: 50 }}
@@ -68,7 +73,7 @@ const SpecialMessage = ({ onNext }) => {
             onClick={onNext}
             className="message-next-button"
           >
-            Continuer notre journée
+            Continuer notre journee
           </motion.button>
         )}
       </div>
