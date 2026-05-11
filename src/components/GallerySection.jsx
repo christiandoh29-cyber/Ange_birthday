@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import data from '../data/content.json';
+import { assetPath } from '../utils/paths';
 import './GallerySection.css';
 
 const GallerySection = ({ onNext }) => {
@@ -18,7 +19,6 @@ const GallerySection = ({ onNext }) => {
   ];
 
   const videos = data.galleryVideos;
-  const images = data.slides;
 
   const openMedia = (index) => setSelectedIndex(index);
   const closeMedia = () => setSelectedIndex(null);
@@ -42,7 +42,7 @@ const GallerySection = ({ onNext }) => {
               loop
               playsInline
             >
-              <source src={video} type="video/mp4" />
+              <source src={assetPath(video)} type="video/mp4" />
             </video>
             <div className="video-bg-overlay" />
           </div>
@@ -57,7 +57,7 @@ const GallerySection = ({ onNext }) => {
           transition={{ duration: 1.5, ease: 'easeOut' }}
           className="gallery-title"
         >
-          Tes Moments Precieux et de joie
+          Nos Moments Precieux
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 30 }}
@@ -65,7 +65,7 @@ const GallerySection = ({ onNext }) => {
           transition={{ duration: 1.5, delay: 0.3, ease: 'easeOut' }}
           className="gallery-subtitle"
         >
-          Photos et videos
+          Photos et videos de notre histoire
         </motion.p>
 
         {/* Centered continue button */}
@@ -107,10 +107,10 @@ const GallerySection = ({ onNext }) => {
               >
                 {allMedia[selectedIndex].type === 'video' ? (
                   <video className="modal-media" controls autoPlay muted>
-                    <source src={allMedia[selectedIndex].image} type="video/mp4" />
+                    <source src={assetPath(allMedia[selectedIndex].image)} type="video/mp4" />
                   </video>
                 ) : (
-                  <img src={allMedia[selectedIndex].image} alt={allMedia[selectedIndex].title} className="modal-media" />
+                  <img src={assetPath(allMedia[selectedIndex].image)} alt={allMedia[selectedIndex].title} className="modal-media" />
                 )}
                 <div className="modal-info">
                   <h3 className="modal-title">{allMedia[selectedIndex].title}</h3>
@@ -138,10 +138,10 @@ const GallerySection = ({ onNext }) => {
           >
             {item.type === 'video' ? (
               <video className="gallery-img" muted loop playsInline>
-                <source src={item.image} type="video/mp4" />
+                <source src={assetPath(item.image)} type="video/mp4" />
               </video>
             ) : (
-              <img src={item.image} alt={item.title} className="gallery-img" />
+              <img src={assetPath(item.image)} alt={item.title} className="gallery-img" />
             )}
             <div className="gallery-caption">
               <span className="caption-type">{item.type === 'video' ? 'Video' : 'Photo'}</span>

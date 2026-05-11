@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import data from '../data/content.json';
+import { assetPath } from '../utils/paths';
 import './RelationshipCounter.css';
 
 const RelationshipCounter = ({ onNext }) => {
@@ -36,12 +37,13 @@ const RelationshipCounter = ({ onNext }) => {
     return () => cancelAnimationFrame(animationFrame);
   }, [daysTogether]);
 
+  const videoSrc = assetPath('/assets/videos/video4.mp4');
+
   return (
     <section className="counter-section">
-      {/* Video background */}
       <div className="counter-video-bg">
         <video className="counter-video-player" autoPlay muted loop playsInline>
-          <source src="/assets/videos/video4.mp4" type="video/mp4" />
+          <source src={videoSrc} type="video/mp4" />
         </video>
         <div className="counter-video-overlay" />
       </div>

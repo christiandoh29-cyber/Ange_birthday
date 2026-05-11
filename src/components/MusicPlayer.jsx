@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { assetPath } from '../utils/paths';
 import './MusicPlayer.css';
 
 const MusicPlayer = () => {
@@ -15,6 +16,8 @@ const MusicPlayer = () => {
     { src: '/assets/music/music2.mp3', label: 'Musique 2' },
   ];
 
+  const getTrackSrc = (trackIndex) => assetPath(tracks[trackIndex - 1].src);
+
   const switchToTrack = useCallback((trackIndex) => {
     if (!audioRef.current) return;
     const wasPlaying = isPlaying;
@@ -22,7 +25,7 @@ const MusicPlayer = () => {
     audioRef.current.pause();
     audioRef.current.onended = null;
 
-    const newAudio = new Audio(tracks[trackIndex - 1].src);
+    const newAudio = new Audio(getTrackSrc(trackIndex));
     newAudio.loop = true;
     newAudio.volume = volume;
     newAudio.preload = 'auto';
@@ -52,7 +55,7 @@ const MusicPlayer = () => {
       audioRef.current = null;
     }
 
-    const audio = new Audio(tracks[0].src);
+    const audio = new Audio(getTrackSrc(1));
     audio.loop = false;
     audio.volume = volume;
     audio.preload = 'auto';

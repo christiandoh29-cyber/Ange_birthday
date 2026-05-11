@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { motion } from 'framer-motion';
 import data from '../data/content.json';
+import { assetPath } from '../utils/paths';
 import './StoryTimeline.css';
 
 const StoryTimeline = ({ onNext }) => {
@@ -33,7 +34,6 @@ const StoryTimeline = ({ onNext }) => {
 
   return (
     <section className="story-timeline">
-      {/* Video background grid */}
       <div className="story-video-grid">
         {videos.map((video, i) => (
           <div key={i} className="story-video-cell">
@@ -44,14 +44,13 @@ const StoryTimeline = ({ onNext }) => {
               loop
               playsInline
             >
-              <source src={video} type="video/mp4" />
+              <source src={assetPath(video)} type="video/mp4" />
             </video>
             <div className="story-video-overlay" />
           </div>
         ))}
       </div>
 
-      {/* Overlay with slideshow content + centered button */}
       <div className="story-overlay-content">
         <div className="swiper-container">
           <Swiper {...swiperParams}>
@@ -83,7 +82,6 @@ const StoryTimeline = ({ onNext }) => {
           </Swiper>
         </div>
 
-        {/* Centered continue button */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

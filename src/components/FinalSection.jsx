@@ -1,9 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import data from '../data/content.json';
+import { assetPath } from '../utils/paths';
 import './FinalSection.css';
 
 const FinalSection = () => {
+  const finalSrc = data.finalBackground?.src ? assetPath(data.finalBackground.src) : null;
+  const fallbackFinal = assetPath('/assets/images/photo11.jpeg');
+
   return (
     <section className="final-section">
       <div className="final-background">
@@ -15,19 +19,17 @@ const FinalSection = () => {
             playsInline
             className="background-video"
           >
-            <source src={data.finalBackground.src} type="video/mp4" />
-            Votre navigateur ne supporte pas la balise vidéo.
+            <source src={finalSrc} type="video/mp4" />
           </video>
         )}
-        {data.finalBackground?.type === 'image' && (
+        {data.finalBackground?.type === 'image' && finalSrc && (
           <div
             className="background-image"
-            style={{ backgroundImage: `url(${data.finalBackground.src})` }}
+            style={{ backgroundImage: `url(${finalSrc})` }}
           />
         )}
-        {/* Fallback to default if no background specified */}
         {!data.finalBackground && (
-          <div className="background-image" style={{ backgroundImage: 'url(/assets/images/photo11.jpeg)' }} />
+          <div className="background-image" style={{ backgroundImage: `url(${fallbackFinal})` }} />
         )}
         <div className="background-layer"></div>
       </div>

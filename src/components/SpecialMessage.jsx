@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import data from '../data/content.json';
+import { assetPath } from '../utils/paths';
 import './SpecialMessage.css';
 
 const SpecialMessage = ({ onNext }) => {
@@ -34,13 +35,14 @@ const SpecialMessage = ({ onNext }) => {
     setCharIndex(0);
   }, []);
 
+  const bgVideoSrc = data.galleryVideos?.length > 0 ? assetPath(data.galleryVideos[0]) : null;
+
   return (
     <section className="special-message-section">
-      {/* Background video using the first gallery video */}
       <div className="message-background">
-        {data.galleryVideos?.length > 0 && (
+        {bgVideoSrc && (
           <video className="message-bg-video" autoPlay muted loop playsInline>
-            <source src={data.galleryVideos[0]} type="video/mp4" />
+            <source src={bgVideoSrc} type="video/mp4" />
           </video>
         )}
         <div className="message-bg-overlay" />

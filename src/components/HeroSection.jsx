@@ -1,9 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import data from '../data/content.json';
+import { assetPath } from '../utils/paths';
 import './HeroSection.css';
 
 const HeroSection = ({ onNext }) => {
+  const heroSrc = data.heroBackground?.src ? assetPath(data.heroBackground.src) : null;
+  const fallbackSrc = assetPath('/assets/images/photo1.webp');
+
   return (
     <section className="hero-section">
       <div className="hero-background">
@@ -15,19 +19,17 @@ const HeroSection = ({ onNext }) => {
             playsInline
             className="background-video"
           >
-            <source src={data.heroBackground.src} type="video/mp4" />
-            Votre navigateur ne supporte pas la balise vidéo.
+            <source src={heroSrc} type="video/mp4" />
           </video>
         )}
-        {data.heroBackground?.type === 'image' && (
+        {data.heroBackground?.type === 'image' && heroSrc && (
           <div
             className="background-image"
-            style={{ backgroundImage: `url(${data.heroBackground.src})` }}
+            style={{ backgroundImage: `url(${heroSrc})` }}
           />
         )}
-        {/* Fallback to default if no background specified */}
         {!data.heroBackground && (
-          <div className="background-image" style={{ backgroundImage: 'url(/assets/images/photo1.webp)' }} />
+          <div className="background-image" style={{ backgroundImage: `url(${fallbackSrc})` }} />
         )}
         <div className="background-overlay"></div>
       </div>
