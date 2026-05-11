@@ -13,7 +13,7 @@ const GallerySection = ({ onNext }) => {
           transition={{ duration: 1.5, ease: 'easeOut' }}
           className="gallery-title"
         >
-          Nos Moments Précieux
+          Nos Moments Precieux
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 30 }}
@@ -31,21 +31,12 @@ const GallerySection = ({ onNext }) => {
             key={index}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: index * 0.1, ease: 'easeOut' }}
+            transition={{ duration: 1, delay: index * 0.05, ease: 'easeOut' }}
             className="gallery-item"
           >
-            <img src={image} alt={"Gallery " + (index + 1)} className="gallery-img" />
-            <div className="gallery-overlay">
-              <div className="gallery-overlay-content">
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="overlay-text"
-                >
-                  Moment spécial
-                </motion.p>
-              </div>
+            <img src={image} alt={"Photo " + (index + 1)} className="gallery-img" />
+            <div className="gallery-caption">
+              {data.slides[index]?.title || "Souvenir " + (index + 1)}
             </div>
           </motion.div>
         ))}
@@ -58,7 +49,7 @@ const GallerySection = ({ onNext }) => {
         onClick={onNext}
         className="gallery-next-button"
       >
-        Découvrir notre message
+        Decouvrir notre message
       </motion.button>
     </section>
   );
