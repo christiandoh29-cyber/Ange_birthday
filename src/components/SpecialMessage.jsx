@@ -68,7 +68,7 @@ const SpecialMessage = ({ onNext }) => {
             onClick={onNext}
             className="message-next-button"
           >
-            Continuer notre journey
+            Continuer notre journée
           </motion.button>
         )}
       </div>

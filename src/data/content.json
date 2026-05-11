@@ -67,16 +67,25 @@
     "/assets/images/photo8.jpeg",
     "/assets/images/photo9.jpeg",
     "/assets/images/photo10.jpeg",
-    "/assets/images/photo11.jpeg"
+    "/assets/images/photo11.jpeg",
+    "/assets/videos/video1.mp4",
+    "/assets/videos/video2.mp4",
+    "/assets/videos/video3.mp4"
+  ],
+  "galleryVideos": [
+    "/assets/videos/video1.mp4",
+    "/assets/videos/video2.mp4",
+    "/assets/videos/video3.mp4"
   ],
   "heroBackground": {
-    "type": "image",
-    "src": "/assets/images/photo1.webp"
+    "type": "video",
+    "src": "/assets/videos/video1.mp4"
   },
   "finalBackground": {
-    "type": "image",
-    "src": "/assets/images/photo11.jpeg"
+    "type": "video",
+    "src": "/assets/videos/video3.mp4"
   },
+  "relationshipStartDate": "2025-11-11",
   "heroTexts": [
     "Aujourd’hui est un jour spécial ✨",
     "Une journée pour célébrer une femme incroyable",

@@ -46,7 +46,7 @@ const RelationshipCounter = ({ onNext }) => {
           transition={{ duration: 1.5, ease: 'easeOut' }}
           className="section-title"
         >
-          Notre Journey Ensemble
+          Notre Journee Ensemble
         </motion.h2>
         
         <motion.div
