@@ -1,0 +1,98 @@
+{
+  "slides": [
+    {
+      "image": "/assets/images/photo1.webp",
+      "title": "Une femme exceptionnelle",
+      "description": "Tu fais partie de ces personnes rares qui inspirent naturellement par leur présence et leur manière d’être."
+    },
+    {
+      "image": "/assets/images/photo2.webp",
+      "title": "Femme de valeur",
+      "description": "Derrière chaque sourire se cache une femme forte, déterminée et pleine d’ambition."
+    },
+    {
+      "image": "/assets/images/photo3.jpeg",
+      "title": "Ton sourire",
+      "description": "Ton sourire possède cette lumière capable d’embellir même les journées les plus simples."
+    },
+    {
+      "image": "/assets/images/photo4.webp",
+      "title": "Élégance naturelle",
+      "description": "Tu dégages une élégance que rien ne force et que tout le monde remarque."
+    },
+    {
+      "image": "/assets/images/photo5.jpeg",
+      "title": "Une belle énergie",
+      "description": "Tu apportes de la douceur, de la bonne humeur et une énergie positive partout où tu passes."
+    },
+    {
+      "image": "/assets/images/photo6.jpeg",
+      "title": "Femme de courage",
+      "description": "Même dans les moments difficiles, tu continues d’avancer avec une force admirable."
+    },
+    {
+      "image": "/assets/images/photo7.jpeg",
+      "title": "Des rêves plein les yeux",
+      "description": "Tu portes en toi des rêves immenses et la capacité de les transformer en réalité."
+    },
+    {
+      "image": "/assets/images/photo8.jpeg",
+      "title": "Beauté et simplicité",
+      "description": "La vraie beauté se voit dans les détails, et chez toi elle se remarque naturellement."
+    },
+    {
+      "image": "/assets/images/photo9.jpeg",
+      "title": "Une personne inspirante",
+      "description": "Tu es le genre de personne qu’on est heureux d’avoir dans sa vie."
+    },
+    {
+      "image": "/assets/images/photo10.jpeg",
+      "title": "Ton histoire continue",
+      "description": "Chaque nouvelle année ajoute encore plus de valeur à la personne incroyable que tu es."
+    },
+    {
+      "image": "/assets/images/photo11.jpeg",
+      "title": "Joyeux anniversaire",
+      "description": "Aujourd’hui est une célébration de toi, de ton parcours, de ta beauté et de tout ce que tu représentes."
+    }
+  ],
+  "galleryImages": [
+    "/assets/images/photo1.webp",
+    "/assets/images/photo2.webp",
+    "/assets/images/photo3.jpeg",
+    "/assets/images/photo4.webp",
+    "/assets/images/photo5.jpeg",
+    "/assets/images/photo6.jpeg",
+    "/assets/images/photo7.jpeg",
+    "/assets/images/photo8.jpeg",
+    "/assets/images/photo9.jpeg",
+    "/assets/images/photo10.jpeg",
+    "/assets/images/photo11.jpeg"
+  ],
+  "heroBackground": {
+    "type": "image",
+    "src": "/assets/images/photo1.webp"
+  },
+  "finalBackground": {
+    "type": "image",
+    "src": "/assets/images/photo11.jpeg"
+  },
+  "heroTexts": [
+    "Aujourd’hui est un jour spécial ✨",
+    "Une journée pour célébrer une femme incroyable",
+    "Joyeux anniversaire ❤️"
+  ],
+  "specialMessage": [
+    "Co ntinue de briller comme tu sais si bien le faire.",
+    "Ne change jamais cette belle personne que tu es.",
+    "Que cette nouvelle année t’apporte encore plus de bonheur, de paix et de réussite.",
+    "Tu mérites tout ce qu’il y a de plus beau.",
+    "Profite pleinement de cette journée qui est la tienne ❤️"
+  ],
+  "endingTexts": [
+    "Une femme magnifique.",
+    "Une âme précieuse.",
+    "Une personne inoubliable.",
+    "Joyeux anniversaire ✨"
+  ]
+}
