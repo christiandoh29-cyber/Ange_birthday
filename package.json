@@ -3,11 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://yourusername.github.io/birthday-love-story",
+  "homepage": "https://christiandoh29-cyber.github.io/Ange_birthday",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:gh": "vite build --base=/birthday/",
+    "build:gh": "vite build --base=/Ange_birthday/",
     "lint": "eslint .",
     "preview": "vite preview",
     "preview:gh": "vite preview --base=/birthday/",
